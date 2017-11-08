@@ -57,3 +57,9 @@ gem 'pry-byebug', group: :development
 group :production do
   gem 'pg'
 end
+
+gem 'rakuten_web_service' , '1.5.0'
+
+gem 'pry-byebug', group: :development
+
+gem 'kaminari'

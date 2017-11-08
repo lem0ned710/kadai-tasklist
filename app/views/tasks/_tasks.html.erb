@@ -4,15 +4,17 @@
     <li class="media">
       <div class="media-body">
         <div>
-          <%= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= task.created_at %></span>
+          <span style="color:#ff0000;">status:<%= task.status %></span>
+          <div>
+            <span style="font-size:130%;"><%= task.content %></span>
+            <% if current_user == task.user %>
+              <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+            <% end %>
+          </div>
+          <%#= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= task.created_at %></span>
         </div>
         <div>
-          <p><%= task.content %></p>
-        </div>
-        <div>
-          <% if current_user == task.user %>
-            <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-          <% end %>
+          
         </div>
       </div>
     </li>

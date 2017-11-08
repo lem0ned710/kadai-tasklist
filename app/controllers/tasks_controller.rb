@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :require_user_logged_in
+  # before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:edit, :update, :destroy, :show]
 
   def index
+    
     if logged_in?
+    # binding.pry
       @user = current_user
       @task = current_user.tasks.build
       @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
@@ -19,7 +22,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       flash[:success] = 'Task が正常に投稿されました'
